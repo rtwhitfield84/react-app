@@ -2,21 +2,30 @@ import React from 'react';
 
 
 class App extends React.Component {
-	render(){
-		return (
-			<Button>i <Heart /> React</Button>
-			) 
+	constructor(){
+		super();
+		this.state = {currentEvent: '___'}
+		this.update = this.update.bind(this)
 	}
-}
-
-const Button = (props) => <button>{props.children}</button>
-
-class Heart extends React.Component {
+	update(e){
+		this.setState({currentEvent: e.type})
+	}
 	render(){
 		return (
-			<span>&hearts;</span>
+			<div>
+			<textarea onKeyPress={this.update}
+			onCopy={this.update}
+			onCut={this.update}
+			onPaste={this.update}
+			cols="30"
+			rows="10" />
+			<h1>{this.state.currentEvent}</h1>
+			</div>
 			) 
 	}
 }
 
 export default App
+
+
+
