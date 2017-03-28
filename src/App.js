@@ -3,8 +3,23 @@ import React from 'react';
 
 class App extends React.Component {
 	render(){
-		return <h1>Hello World</h1>
+		let txt = this.props.txt
+		return (
+			<div>
+				<h1>{txt}</h1>
+				<b>bold</b>
+			</div>
+			) 
 	}
+}
+
+App.propTypes = {
+	txt: React.PropTypes.string,
+	cat: React.PropTypes.number.isRequired
+}
+
+App.defaultProps = {
+	txt:"this is default text",
 }
 
 export default App
