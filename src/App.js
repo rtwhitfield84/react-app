@@ -1,36 +1,50 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 
 class App extends React.Component {
-	constructor(){
+	constructor() {
 		super();
-		this.state = {a: ''}
+		this.state = {val: 0}
+		this.update = this.update.bind(this)
 	}
 	update(){
-		this.setState({
-			a: this.refs.a.value,
-			b: this.refs.b.value
-		})
+		this.setState({val: this.state.val + 1})
+	}
+	componentWillMount(){
+		console.log("componentWillMount");
 	}
 	render(){
-		return (
-			<div>
-			<input ref="a"
-			type="text"
-			onChange={this.update.bind(this)}
-			/> {this.state.a}
-			<hr />
-			<input
-			ref="b"
-			type="text"
-			onChange={this.update.bind(this)}
-			/> {this.state.b}
-			</div>
-			) 
+		console.log("render");
+		return <button onClick={this.update}>{this.state.val}</button>
+	}
+	componentDidMount(){
+		console.log("componentDidMount");
+	}
+	componentWillUnmount(){
+		console.log("componentWillUnmount");
 	}
 }
 
-export default App
+class Wrapper extends React.Component{
+	mount(){
+		ReactDOM.render(<App />, document.getElementById('a'))
+	}
+	unmount(){
+		ReactDOM.unmountComponentAtNode(document.getElementById('a'))
+	}
+	render(){
+		return(
+			<div>
+				<button onClick={this.mount.bind(this)}>Mount</button>
+				<button onClick={this.unmount.bind(this)}>UnMount</button>
+				<div id="a"></div>
+			</div>
+			)
+	}
+}
+
+export default Wrapper
 
 
 
